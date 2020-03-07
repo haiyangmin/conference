@@ -102,3 +102,13 @@ dist
 
 # TernJS port file
 .tern-port
+
+// IDE files
+.idea/*
+*.sln
+*.njsproj
+*.sublime-project
+*.sublime-workspace
+*.sublime*
+.vscode/*
+jsconfig.json
