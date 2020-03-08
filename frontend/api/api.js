@@ -17,9 +17,13 @@ export const fetchLatestConference = () => {
 };
 
 export const createConference = (conference) => {
-    return axios.put('/api/conferences',conference);
+    return axios.post('/api/conferences',conference);
 };
 
 export const updateConference = (name,conference) => {
     return axios.put(`/api/conferences/${name}`, conference);
+};
+
+export const deleteConference = (id) => {
+    return axios.delete(`/api/conferences/${id}`);
 };

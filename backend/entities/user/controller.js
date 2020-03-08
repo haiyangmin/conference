@@ -1,6 +1,6 @@
 const User = require('./model');
 
-const getUser = (user_id) => {
+const getUserById = (user_id) => {
     return new Promise((resolve, reject) => {
         User.findOne({ _id: user_id }, (error, user) => {
             if (error) { console.log(error); reject(error); }
@@ -9,6 +9,20 @@ const getUser = (user_id) => {
         });
     });
 };
+
+
+const getAllUser = () => {
+    return new Promise((resolve, reject) => {
+        User
+            .find({})
+            .exec((error, results) => {
+                if (error) { console.log(error); reject(error); }
+                else if (!results) reject(null);
+                else resolve(results);
+            });
+    });
+};
+
 
 
 const getUserByName = (username) => {
@@ -30,9 +44,8 @@ const createUser = (user) => {
             date: new Date(),
             username: user.username,
             email: user.email,
+            role: user.role
         });
-
-
         newUser.save((error) => {
             if (error) {
                 console.log(error);
@@ -43,10 +56,9 @@ const createUser = (user) => {
     });
 };
 
-
-
 module.exports = {
-    getUser,
+    getUserById,
+    getAllUser,
     getUserByName,
     createUser,
 };

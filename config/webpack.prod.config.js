@@ -8,11 +8,9 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 // define paths
 const nodeModulesPath = path.resolve(__dirname, '../node_modules');
 const buildPath = path.resolve(__dirname, '../public', 'build');
-const mainAppPath = path.resolve(__dirname, '../frontend', 'app', 'index.js');
-const sharedStylesPath = path.resolve(__dirname, '../frontend', 'sharedStyles');
+const mainAppPath = path.resolve(__dirname, '../frontend', 'index.js');
 const componentsPath = path.resolve(__dirname, '../frontend', 'components');
 const containersPath = path.resolve(__dirname, '../frontend', 'containers');
-const viewsPath = path.resolve(__dirname, '../frontend', 'views');
 
 /**
  * webpack production configuration
@@ -33,7 +31,7 @@ module.exports = {
         loaders: [
             {
                 test: /\.js$/,
-                loaders: [ 'react-hot', 'babel-loader' ],
+                loaders: [ 'babel-loader' ],
                 exclude: [nodeModulesPath],
             },
             {
@@ -60,10 +58,8 @@ module.exports = {
     resolve: {
         extensions: ['', '.js', '.css'],
         alias: {
-            SharedStyles: sharedStylesPath,
             Components: componentsPath,
             Containers: containersPath,
-            Views: viewsPath,
         },
     },
 

@@ -2,6 +2,7 @@ const getAllConferences = require('./controller').getAllConferences;
 const getLatestgetAllConferences = require('./controller').getLatestgetAllConferences;
 const createConference = require('./controller').createConference;
 const updateConference = require('./controller').updateConference;
+const deleteConference = require('./controller').deleteConference;
 
 const conferenceAPI = (app) => {
 
@@ -19,7 +20,7 @@ const conferenceAPI = (app) => {
         );
     });
 
-    app.put('/api/conferences', (req, res) => {
+    app.post('/api/conference', (req, res) => {
         createConference(req.body).then(
             (result) => {
                 res.send(result);
@@ -31,8 +32,20 @@ const conferenceAPI = (app) => {
         );
     });
 
-    app.put('/api/conferences/:name', (req, res) => {
+    app.put('/api/conference/:id', (req, res) => {
         updateConference(req.params.name, req.body).then(
+            (result) => {
+                res.send(result);
+            },
+            (error) => {
+                console.log(error);
+                res.send({ conferencesUpdated: false });
+            }
+        );
+    });
+
+    app.delete('/api/conference/:id', (req, res) => {
+        deleteConference(req.params.id).then(
             (result) => {
                 res.send(result);
             },

@@ -1,5 +1,6 @@
 const getUserByName = require('./controller').getUserByName;
 const createUser = require('./controller').createUser;
+const getAllUser = require('./controller').getAllUser;
 
 const userAPI = (app) => {
 
@@ -14,7 +15,18 @@ const userAPI = (app) => {
         );
     });
 
-    app.put('/api/user/:username', (req, res) => {
+    app.get('/api/user', (req, res) => {
+        getAllUser().then(
+            result => {
+                res.send(result);
+            },
+            error => {
+                res.send({ error });
+            }
+        );
+    });
+
+    app.post('/api/user/:username', (req, res) => {
         createUser(req.body).then(
             (result) => {
                 res.send(result);

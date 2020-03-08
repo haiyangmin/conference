@@ -9,11 +9,9 @@ const conferencesMockData = require('./backend/mockdata/conferences');
 const userMockData = require('./backend/mockdata/users');
 
 const createConference = require('./backend/entities/conference/controller').createConference;
-const createUser = require('./backend/entities/conference/controller').createUser;
+const createUser = require('./backend/entities/user/controller').createUser;
 
 const options = {
-    reconnectTries: 1000,
-    reconnectInterval: 500,
     poolSize: 10,
     bufferMaxEntries: 0,
     useUnifiedTopology: true,
@@ -24,12 +22,13 @@ mongoose.connect(serverConfigs.DBURL,options)
     .then(
         () => {
             console.log('connected to mongodb');
-            conferencesMockData.forEach((data) => {
-                createConference(data)
-            });
-            userMockData.forEach((data) => {
-                createUser(data)
-            })
+            console.log(userMockData);
+            // conferencesMockData.forEach((data) => {
+            //     createConference(data)
+            // });
+            // userMockData.forEach((data) => {
+            //     createUser(data)
+            // })
         },
         (err) => {
             console.log('some problem with the connection to mongodb' +err);

@@ -35,7 +35,8 @@ const createConference = (conference) => {
             startTime: conference.startTime,
             endTime: conference.endTime,
             address: conference.address,
-            roomsAvailability: conference.roomsAvailability,
+            roomName: conference.roomName,
+            roomAvailability: conference.roomAvailability,
             participants: conference.participants,
         });
 
@@ -50,24 +51,36 @@ const createConference = (conference) => {
     });
 };
 
-const updateConference = (name,updates) => {
+const updateConference = (id,updates) => {
     return new Promise((resolve, reject) => {
-        Conference.findOne({ name }, (error, conference) => {
-            if (error) { console.log(error); reject(error); }
-            else if (!conference) reject(null);
-            else if (conference) {
-                conference.name = updates.name;
-                conference.startTime = updates.startTime;
-                conference.endTime = updates.endTime;
-                conference.address = updates.address;
-                conference.roomsAvailability = updates.roomsAvailability;
-                conference.participants = updates.participants;
+        Conference.findById(id)
+            .exec((error, conference) => {
+                if (error) { console.log(error); reject(error); }
+                else if (!conference) reject(null);
+                else if (conference) {
+                    conference.name = updates.name;
+                    conference.startTime = updates.startTime;
+                    conference.endTime = updates.endTime;
+                    conference.address = updates.address;
+                    conference.roomName = updates.roomName;
+                    conference.roomAvailability = updates.roomAvailability;
+                    conference.participants = updates.participants;
 
-                conference.save((error) => {
-                    if (error) { console.log(error); reject(error); }
-                    else { resolve(conference); }
-                });
-            }
+                    conference.save((error) => {
+                        if (error) { console.log(error); reject(error); }
+                        else { resolve(conference); }
+                    });
+                }
+            });
+    });
+};
+
+const deleteConference = (id) => {
+    return new Promise((resolve, reject) => {
+        Conference.remove({ _id: id })
+            .exec((error) => {
+            if (error) { console.log(error); reject({ deleted: false }); }
+            else { resolve({ deleted: true }); }
         });
     });
 };
@@ -76,5 +89,6 @@ module.exports = {
     getAllConferences,
     getLatestgetAllConferences,
     createConference,
-    updateConference
+    updateConference,
+    deleteConference
 };
