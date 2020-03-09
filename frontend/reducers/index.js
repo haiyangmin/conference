@@ -3,7 +3,7 @@ import { conferenceReducer }from './conference'
 import { userReducer } from './user'
 
 export default combineReducers({
-    conferenceReducer,
-    userReducer
+    app: conferenceReducer,
+    user: userReducer
 })
 

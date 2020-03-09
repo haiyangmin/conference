@@ -14,6 +14,10 @@ import {
     UPDATE_CONFERENCE,
     UPDATE_CONFERENCE_SUCCESS,
     UPDATE_CONFERENCE_FAILURE,
+    OPEN_PARTICIPATION_FORM,
+    CLOSE_PARTICIPATION_FORM,
+    OPEN_UPDATE_FORM,
+    CLOSE_UPDATE_FORM,
 } from '../constants/ActionTypes';
 
 import {
@@ -23,6 +27,7 @@ import {
     fetchLatestConference,
     createConference,
     updateConference,
+    deleteConference,
 } from '../api/api';
 
 
@@ -76,6 +81,34 @@ export const getAllConference = () => {
     };
 };
 
+export const openParticipationForm = () => {
+    return {
+        type: OPEN_PARTICIPATION_FORM,
+        openParticipationForm: true,
+    }
+};
+
+export const closeParticipationForm = () => {
+    return {
+        type: CLOSE_PARTICIPATION_FORM,
+        openParticipationForm: false,
+    }
+};
+
+export const openUpdateForm = () => {
+    return {
+        type: OPEN_UPDATE_FORM,
+        openUpdateForm: true,
+    }
+};
+
+export const closeUpdateForm = () => {
+    return {
+        type: CLOSE_UPDATE_FORM,
+        openUpdateForm: false,
+    }
+};
+
 export const createConferenceAction = (conference) => {
     return (dispatch, getState) => {
         dispatch({ type: START_CREATE_CONFERENCE });
@@ -93,6 +126,17 @@ export const updateConferenceAction = (name,conference) => {
         dispatch({ type: UPDATE_CONFERENCE });
 
         updateConference(name,conference).then(
+            data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
+            error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
+        );
+    };
+};
+
+export const deleteConferenceAction = (name,conference) => {
+    return (dispatch, getState) => {
+        dispatch({ type: UPDATE_CONFERENCE });
+
+        deleteConference(name,conference).then(
             data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
             error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
         );

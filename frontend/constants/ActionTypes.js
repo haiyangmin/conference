@@ -10,6 +10,11 @@ export const START_FETCHING_CONFERENCES = 'start_fetching_conferences';
 export const FETCHING_CONFERENCES_SUCCESS = 'fetching_conferences_success';
 export const FETCHING_CONFERENCES_FAILURE = 'fetching_conferences_failure';
 
+export const OPEN_PARTICIPATION_FORM = 'open_participation_Form';
+export const CLOSE_PARTICIPATION_FORM = 'close_participation_Form';
+export const OPEN_UPDATE_FORM = 'open_update_form';
+export const CLOSE_UPDATE_FORM = 'close_update_form';
+
 export const START_CREATE_CONFERENCE = 'start_create_conference';
 export const CREATE_CONFERENCE_SUCCESS = 'create_conference_success';
 export const CREATE_CONFERENCE_FAILURE = 'create_conference_failure';

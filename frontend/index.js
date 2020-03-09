@@ -5,7 +5,6 @@ import { Provider } from 'react-redux'
 import { createLogger } from 'redux-logger'
 import thunk from 'redux-thunk'
 import reducer from './reducers'
-import { getAllConference } from './actions'
 import App from './containers/App'
 
 const middleware = [ thunk ];
@@ -18,11 +17,9 @@ const store = createStore(
     applyMiddleware(...middleware)
 );
 
-store.dispatch(getAllConference());
-
 render(
     <Provider store={store}>
         <App />
     </Provider>,
     document.getElementById('root')
-)
+);

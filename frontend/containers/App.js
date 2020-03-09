@@ -1,13 +1,33 @@
-import React from 'react'
-// import ProductsContainer from './ProductsContainer'
-// import CartContainer from './CartContainer'
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Helmet } from 'react-helmet';
 
-const App = () => (
-    <div>
-        <h2>Shopping Cart Example</h2>
-        <hr/>
-        <hr/>
-    </div>
-)
+import ConferencesContainer from './ConferencesContainer';
 
-export default App
+import { getAllConference } from '../actions';
+
+class AppContainer extends Component {
+    componentDidMount() {
+        console.log(this.props);
+        this.props.getAllConference();
+    }
+
+    render() {
+        return (
+            <div>
+                <Helmet><title>Conferences</title></Helmet>
+                <ConferencesContainer/>
+            </div>
+        );
+    }
+}
+
+export default connect(
+    (state) => { return {
+        app: state.app,
+        user: state.user,
+    }; },
+    (dispatch) => { return {
+        getAllConference: () => { dispatch(getAllConference()); },
+    };}
+)(AppContainer);

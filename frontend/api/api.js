@@ -1,15 +1,15 @@
 import axios from 'axios';
 
 export const fetchUser = () => {
-    return axios.get('/api/user/');
+    return axios.get('/api/user');
 };
 
 export const createUser = (user) => {
-    return axios.put('/api/user/',user);
+    return axios.put('/api/user',user);
 };
 
 export const fetchConferences = () => {
-    return axios.get('/api/conferences/');
+    return axios.get('/api/conferences');
 };
 
 export const fetchLatestConference = () => {
