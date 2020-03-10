@@ -121,11 +121,11 @@ export const createConferenceAction = (conference) => {
 };
 
 
-export const updateConferenceAction = (name,conference) => {
+export const updateConferenceAction = (id,conference) => {
     return (dispatch, getState) => {
         dispatch({ type: UPDATE_CONFERENCE });
 
-        updateConference(name,conference).then(
+        updateConference(id,conference).then(
             data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
             error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
         );

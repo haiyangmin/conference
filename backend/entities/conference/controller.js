@@ -58,14 +58,9 @@ const updateConference = (id,updates) => {
                 if (error) { console.log(error); reject(error); }
                 else if (!conference) reject(null);
                 else if (conference) {
-                    conference.name = updates.name;
-                    conference.startTime = updates.startTime;
-                    conference.endTime = updates.endTime;
-                    conference.address = updates.address;
-                    conference.roomName = updates.roomName;
-                    conference.roomAvailability = updates.roomAvailability;
-                    conference.participants = updates.participants;
-
+                    Object.keys(updates).forEach((key) => {
+                        conference[key] = updates[key];
+                    });
                     conference.save((error) => {
                         if (error) { console.log(error); reject(error); }
                         else { resolve(conference); }

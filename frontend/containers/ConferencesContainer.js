@@ -84,7 +84,7 @@ export default connect(
         user: state.user,
     }; },
     (dispatch) => { return {
-        updateConferenceAction: (name,conference) => { dispatch(updateConferenceAction(name,conference)); },
+        updateConferenceAction: (id,conference) => { dispatch(updateConferenceAction(id,conference)); },
         deleteConferenceAction: (conference) => { dispatch(deleteConferenceAction(conference)); },
         createConferenceAction: (conference) => { dispatch(createConferenceAction(conference)); },
         openParticipationForm: () => { dispatch(openParticipationForm()); },

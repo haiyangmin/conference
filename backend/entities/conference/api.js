@@ -33,7 +33,7 @@ const conferenceAPI = (app) => {
     });
 
     app.put('/api/conference/:id', (req, res) => {
-        updateConference(req.params.name, req.body).then(
+        updateConference(req.params.id, req.body).then(
             (result) => {
                 res.send(result);
             },

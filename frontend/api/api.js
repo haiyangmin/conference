@@ -20,8 +20,8 @@ export const createConference = (conference) => {
     return axios.post('/api/conferences',conference);
 };
 
-export const updateConference = (name,conference) => {
-    return axios.put(`/api/conferences/${name}`, conference);
+export const updateConference = (id,conference) => {
+    return axios.put(`/api/conferences/${id}`, conference);
 };
 
 export const deleteConference = (id) => {
