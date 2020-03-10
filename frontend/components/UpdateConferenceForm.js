@@ -2,18 +2,18 @@ import React from 'react'
 
 const UpdateConferenceForm = ({ onUpdate}) => (
     <div>
-        <form onSubmit={onUpdate} >
+        <form >
             <label>
                 Name:
                 <input type="text" name="name" />
             </label>
             <label>
                 Start time:
-                <input type="text" name="start time" />
+                <input type="datetime-local" name="start time" />
             </label>
             <label>
                 End time:
-                <input type="text" name="end time" />
+                <input type="datetime-local" name="end time" />
             </label>
             <label>
                 Room name:
@@ -27,7 +27,10 @@ const UpdateConferenceForm = ({ onUpdate}) => (
                 Max seats:
                 <input type="number" name="max seats" />
             </label>
-            <input type="submit" value="Submit" />
+            <button
+                onClick={onUpdate}>
+                Submit
+            </button>
         </form>
     </div>
 );

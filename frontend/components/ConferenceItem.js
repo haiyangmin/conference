@@ -4,7 +4,18 @@ import ConferenceRoom from './ConferenceRoom';
 import ParticipationForm from './ParticipationForm';
 import UpdateConferenceForm from './UpdateConferenceForm';
 
-const ConferenceItem = ({ conference, onParticipate, onCancel, onUpdate, openParticipationForm, openUpdateForm }) => (
+const ConferenceItem = ({ conference,
+                            onParticipate,
+                            onCancel,
+                            onUpdate,
+                            openParticipationForm,
+                            openUpdateForm,
+                            closeParticipationForm,
+                            closeUpdateForm,
+                            isParticipationFormOpen,
+                            isUpdateFormOpen }) => {
+
+    return (
     <div style={{ marginBottom: 20 }}>
         <Conference
             name={conference.name}
@@ -14,37 +25,39 @@ const ConferenceItem = ({ conference, onParticipate, onCancel, onUpdate, openPar
         <ConferenceRoom
             name={conference.roomName}
             address={conference.address}
-            seatsTaken={conference.roomAvailability - conference.participants.length}
+            seatsLeft={conference.roomAvailability - conference.participants.length}
             maxSeats={conference.roomAvailability} />
         <div>
-            { openParticipationForm ?  <ParticipationForm>
+            { isParticipationFormOpen ?  <ParticipationForm>
                 seatsTaken={conference.roomAvailability - conference.participants.length}
                 maxSeats={conference.roomAvailability}
                 onParticipate={onParticipate}
             </ParticipationForm> : null }
         </div>
         <div>
-            { openUpdateForm ?  <UpdateConferenceForm>
+            { isUpdateFormOpen ?  <UpdateConferenceForm>
                 onUpdate={onUpdate}
             </UpdateConferenceForm> : null }
         </div>
         <div>
-            { !openParticipationForm ? <button
-                onClick={onParticipate}>
+            <button
+                onClick={isParticipationFormOpen ? closeParticipationForm : openParticipationForm}>
                 Participate
-            </button> : null }
+            </button>
         </div>
         <div>
-            { !openUpdateForm  ? <button
-                onClick={onUpdate}>
+            <button
+                onClick={isUpdateFormOpen ? closeUpdateForm : openUpdateForm}>
                 Update conference
-            </button> : null }
+            </button>
         </div>
-        <button
-            onClick={onCancel}>
-            Cancel conference
-        </button>
+        <div>
+            <button
+                onClick={onCancel}>
+                Cancel conference
+            </button>
+        </div>
     </div>
-);
+)};
 
 export default ConferenceItem

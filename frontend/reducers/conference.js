@@ -38,12 +38,12 @@ export const conferenceReducer = (state = initialState, action) => {
 
         case OPEN_UPDATE_FORM:
             return {...state,
-                openParticipationForm: action.openUpdateForm,
+                openUpdateForm: action.openUpdateForm,
             };
 
         case CLOSE_UPDATE_FORM:
             return {...state,
-                openParticipationForm: action.openUpdateForm,
+                openUpdateForm: action.openUpdateForm,
             };
 
         case START_FETCHING_CONFERENCES:

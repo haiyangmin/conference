@@ -8,7 +8,6 @@ import { getAllConference } from '../actions';
 
 class AppContainer extends Component {
     componentDidMount() {
-        console.log(this.props);
         this.props.getAllConference();
     }
 

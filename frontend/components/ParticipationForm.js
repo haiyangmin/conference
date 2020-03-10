@@ -9,12 +9,12 @@ const ParticipationForm = ({ seatsTaken,maxSeats,onParticipate}) => (
             </label>
             <label>
                 Email:
-                <input type="text" name="name" />
+                <input type="email" name="email" />
             </label>
             <button
                 onClick={onParticipate}
                 disabled={seatsTaken === maxSeats ? 'disabled' : ''}>
-                Participate
+                Submit
             </button>
         </form>
     </div>

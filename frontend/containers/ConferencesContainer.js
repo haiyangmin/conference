@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateConferenceAction, createConferenceAction, deleteConferenceAction, getAllConference } from '../actions';
+import { updateConferenceAction,
+    createConferenceAction,
+    deleteConferenceAction,
+    openParticipationForm,
+    closeParticipationForm,
+    openUpdateForm,
+    closeUpdateForm,
+    getAllConference } from '../actions';
 import ConferenceItem from '../components/ConferenceItem';
 import ConferencesList from '../components/ConferencesList';
 
@@ -11,8 +18,6 @@ class ConferencesContainer extends Component {
     }
 
     render() {
-        console.log(this.props);
-
         const {
             creatingConference,
             updatingConference,
@@ -44,15 +49,19 @@ class ConferencesContainer extends Component {
         }
 
         if (this.props.app.conferences.length > 0) {
-            console.log(this.props.app.conferences);
             return (
                 <ConferencesList >
-                    {this.props.app.conferences.map(conference =>
+                    {this.props.app.conferences.map((conference,index) =>
                         <ConferenceItem
+                            key={index.toString()}
                             conference={conference}
                             openParticipationForm={this.props.openParticipationForm}
                             openUpdateForm={this.props.openUpdateForm}
+                            closeParticipationForm={this.props.closeParticipationForm}
+                            closeUpdateForm={this.props.closeUpdateForm}
                             onParticipate={this.props.updateConferenceAction}
+                            isParticipationFormOpen={this.props.app.openParticipationForm}
+                            isUpdateFormOpen={this.props.app.openUpdateForm}
                             onCancel={this.props.deleteConferenceAction}
                             onUpdate={this.props.updateConferenceAction} />
                     )}
@@ -76,8 +85,12 @@ export default connect(
     }; },
     (dispatch) => { return {
         updateConferenceAction: (name,conference) => { dispatch(updateConferenceAction(name,conference)); },
-        deleteConferenceAction: (name,conference) => { dispatch(deleteConferenceAction(conference)); },
-        createConferenceAction: (name,conference) => { dispatch(createConferenceAction(conference)); },
+        deleteConferenceAction: (conference) => { dispatch(deleteConferenceAction(conference)); },
+        createConferenceAction: (conference) => { dispatch(createConferenceAction(conference)); },
+        openParticipationForm: () => { dispatch(openParticipationForm()); },
+        closeParticipationForm: () => { dispatch(closeParticipationForm()); },
+        openUpdateForm: () => { dispatch(openUpdateForm()); },
+        closeUpdateForm: () => { dispatch(closeUpdateForm()); },
         getAllConference: () => { dispatch(getAllConference()); },
     }; }
 )(ConferencesContainer);
