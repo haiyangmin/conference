@@ -81,7 +81,8 @@ export const getAllConference = () => {
     };
 };
 
-export const openParticipationForm = () => {
+export const openParticipationForm = (_) => {
+    console.log(_);
     return {
         type: OPEN_PARTICIPATION_FORM,
         openParticipationForm: true,
@@ -121,11 +122,11 @@ export const createConferenceAction = (conference) => {
 };
 
 
-export const updateConferenceAction = (id,conference) => {
+export const updateConferenceAction = (id,updates) => {
     return (dispatch, getState) => {
         dispatch({ type: UPDATE_CONFERENCE });
 
-        updateConference(id,conference).then(
+        updateConference({updates:updates,id:id}).then(
             data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
             error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
         );

@@ -17,6 +17,10 @@ class ConferencesContainer extends Component {
         super(props);
     }
 
+    componentDidMount() {
+        console.log(this.props);
+    }
+
     render() {
         const {
             creatingConference,
@@ -24,7 +28,7 @@ class ConferencesContainer extends Component {
             fetchingConferences,
         } = this.props.app;
 
-        if (fetchingConferences) {
+        if (this.props.app.fetchingConferences) {
             return (
                 <div>
                     Loading, Please wait
@@ -32,7 +36,7 @@ class ConferencesContainer extends Component {
             );
         }
 
-        if (creatingConference) {
+        if (this.props.app.creatingConference) {
             return (
                 <div>
                     Creating Conference, Please wait
@@ -40,7 +44,7 @@ class ConferencesContainer extends Component {
             );
         }
 
-        if (updatingConference) {
+        if (this.props.app.updatingConference) {
             return (
                 <div>
                     Updating Conference, Please wait

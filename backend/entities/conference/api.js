@@ -3,6 +3,7 @@ const getLatestgetAllConferences = require('./controller').getLatestgetAllConfer
 const createConference = require('./controller').createConference;
 const updateConference = require('./controller').updateConference;
 const deleteConference = require('./controller').deleteConference;
+const getConferenceById = require('./controller').getConferenceById;
 
 const conferenceAPI = (app) => {
 
@@ -32,8 +33,20 @@ const conferenceAPI = (app) => {
         );
     });
 
-    app.put('/api/conference/:id', (req, res) => {
-        updateConference(req.params.id, req.body).then(
+    app.get('/api/conference/:id', (req, res) => {
+        getConferenceById(req.params.id).then(
+            (result) => {
+                res.send(result);
+            },
+            (error) => {
+                console.log(error);
+                res.send(error);
+            }
+        );
+    });
+
+    app.put('/api/conference', (req, res) => {
+        updateConference(req.body.id, req.body.updates).then(
             (result) => {
                 res.send(result);
             },

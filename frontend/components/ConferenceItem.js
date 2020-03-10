@@ -3,6 +3,7 @@ import Conference from './Conference';
 import ConferenceRoom from './ConferenceRoom';
 import ParticipationForm from './ParticipationForm';
 import UpdateConferenceForm from './UpdateConferenceForm';
+import DeleteButton from './DeleteButton';
 
 const ConferenceItem = ({ conference,
                             onParticipate,
@@ -14,6 +15,16 @@ const ConferenceItem = ({ conference,
                             closeUpdateForm,
                             isParticipationFormOpen,
                             isUpdateFormOpen }) => {
+
+    console.log(conference);
+
+    const hide = {
+        display: 'none',
+    };
+
+    const show = {
+        display: 'block',
+    };
 
     return (
     <div style={{ marginBottom: 20 }}>
@@ -27,17 +38,18 @@ const ConferenceItem = ({ conference,
             address={conference.address}
             seatsLeft={conference.roomAvailability - conference.participants.length}
             maxSeats={conference.roomAvailability} />
-        <div>
-            { isParticipationFormOpen ?  <ParticipationForm>
-                seatsTaken={conference.roomAvailability - conference.participants.length}
-                maxSeats={conference.roomAvailability}
-                onParticipate={onParticipate}
-            </ParticipationForm> : null }
+        <div style={isParticipationFormOpen ? show : hide}>
+             <ParticipationForm
+                 seatsLeft={conference.roomAvailability - conference.participants.length}
+                 onParticipate={onParticipate}
+                 conference={conference}>
+            </ParticipationForm>
         </div>
-        <div>
-            { isUpdateFormOpen ?  <UpdateConferenceForm>
+        <div style={isUpdateFormOpen ? show : hide}>
+            <UpdateConferenceForm
                 onUpdate={onUpdate}
-            </UpdateConferenceForm> : null }
+                conference={conference}>
+            </UpdateConferenceForm>
         </div>
         <div>
             <button
@@ -52,10 +64,11 @@ const ConferenceItem = ({ conference,
             </button>
         </div>
         <div>
-            <button
-                onClick={onCancel}>
+            <DeleteButton
+                onClick={onCancel}
+                conference={conference}>
                 Cancel conference
-            </button>
+            </DeleteButton>
         </div>
     </div>
 )};

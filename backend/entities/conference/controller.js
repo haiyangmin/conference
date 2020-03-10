@@ -12,6 +12,18 @@ const getAllConferences = () => {
     });
 };
 
+const getConferenceById = (id) => {
+    console.log('test');
+    return new Promise((resolve, reject) => {
+        Conference.findById(id)
+            .exec((error, results) => {
+                if (error) { console.log(error); reject(error); }
+                else if (!results) reject(null);
+                else resolve(results);
+            });
+    });
+};
+
 
 const getLatestgetAllConferences = () => {
     return new Promise((resolve, reject) => {
@@ -59,7 +71,12 @@ const updateConference = (id,updates) => {
                 else if (!conference) reject(null);
                 else if (conference) {
                     Object.keys(updates).forEach((key) => {
-                        conference[key] = updates[key];
+                        if (key === 'participants') {
+                            conference[key].push(updates[key][0])
+                        }
+                        else {
+                            conference[key] = updates[key];
+                        }
                     });
                     conference.save((error) => {
                         if (error) { console.log(error); reject(error); }
@@ -71,13 +88,14 @@ const updateConference = (id,updates) => {
 };
 
 const deleteConference = (id) => {
-    return new Promise((resolve, reject) => {
+    let promise = new Promise((resolve, reject) => {
         Conference.remove({ _id: id })
             .exec((error) => {
-            if (error) { console.log(error); reject({ deleted: false }); }
-            else { resolve({ deleted: true }); }
-        });
+                if (error) { console.log(error); reject({ deleted: false }); }
+                else { resolve({ deleted: true }); }
+            });
     });
+    return promise.then(getAllConferences());
 };
 
 module.exports = {
@@ -85,5 +103,6 @@ module.exports = {
     getLatestgetAllConferences,
     createConference,
     updateConference,
-    deleteConference
+    deleteConference,
+    getConferenceById
 };
