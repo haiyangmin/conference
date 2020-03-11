@@ -1,14 +1,17 @@
 import React from 'react'
 
-class DeleteButton extends React.Component {
+class Button extends React.Component {
     constructor(props) {
         super(props);
+        this.state = {
+            id: this.props.conferenceId
+        };
         this.handleClick = this.handleClick.bind(this);
     }
 
     handleClick(event) {
         event.preventDefault();
-        this.props.onCancel(this.props.conference._id)
+        this.props.onClick(this.state.id)
     }
 
     render() {
@@ -17,10 +20,10 @@ class DeleteButton extends React.Component {
                 className="btn btn-secondary"
                 style={{ marginRight: 20 }}
                 onClick={this.handleClick}>
-                Delete Conference
+                {this.props.buttonName}
             </button>
         );
     }
 }
 
-export default DeleteButton
+export default Button

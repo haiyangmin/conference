@@ -56,6 +56,8 @@ class ConferencesContainer extends Component {
                             openUpdateForm={ this.props.openUpdateForm }
                             closeParticipationForm={ this.props.closeParticipationForm }
                             closeUpdateForm={ this.props.closeUpdateForm }
+                            participationFormId={ this.props.app.participationFormId }
+                            updateFormId={ this.props.app.updateFormId }
                             onParticipate={ this.props.updateConferenceAction }
                             isParticipationFormOpen={ this.props.app.openParticipationForm }
                             isUpdateFormOpen={ this.props.app.openUpdateForm }
@@ -70,7 +72,7 @@ class ConferencesContainer extends Component {
                         <button
                             className="btn btn-secondary"
                             onClick={ this.props.app.openCreateForm ? this.props.closeCreateForm : this.props.openCreateForm }>
-                            Create New Conference
+                            {this.props.app.openCreateForm ? 'Close Form' : 'Create New Conference'}
                         </button>
                     </div>
                 </ConferencesList>
@@ -92,20 +94,20 @@ export default connect(
             updateConferenceAction: (id, conference) => {
                 dispatch(updateConferenceAction(id, conference));
             },
-            deleteConferenceAction: (conference) => {
-                dispatch(deleteConferenceAction(conference));
+            deleteConferenceAction: (id) => {
+                dispatch(deleteConferenceAction(id));
             },
             createConferenceAction: (conference) => {
                 dispatch(createConferenceAction(conference));
             },
-            openParticipationForm: () => {
-                dispatch(openParticipationForm());
+            openParticipationForm: (id) => {
+                dispatch(openParticipationForm(id));
             },
             closeParticipationForm: () => {
                 dispatch(closeParticipationForm());
             },
-            openUpdateForm: () => {
-                dispatch(openUpdateForm());
+            openUpdateForm: (id) => {
+                dispatch(openUpdateForm(id));
             },
             closeUpdateForm: () => {
                 dispatch(closeUpdateForm());

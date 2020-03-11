@@ -20,6 +20,8 @@ const initialState = {
     openParticipationForm: false,
     openUpdateForm: false,
     openCreateForm: false,
+    participationFormId: null,
+    updateFormId: null,
     fetchingConferences: true,
     creatingConference: false,
     updatingConference: false,
@@ -33,21 +35,25 @@ export const conferenceReducer = (state = initialState, action) => {
         case OPEN_PARTICIPATION_FORM:
             return {...state,
                 openParticipationForm: action.openParticipationForm,
+                participationFormId: action.participationFormId
             };
 
         case CLOSE_PARTICIPATION_FORM:
             return {...state,
                 openParticipationForm: action.openParticipationForm,
+                participationFormId: action.participationFormId
             };
 
         case OPEN_UPDATE_FORM:
             return {...state,
                 openUpdateForm: action.openUpdateForm,
+                updateFormId: action.updateFormId,
             };
 
         case CLOSE_UPDATE_FORM:
             return {...state,
                 openUpdateForm: action.openUpdateForm,
+                updateFormId: action.updateFormId,
             };
 
         case OPEN_CREATE_FORM:
@@ -109,6 +115,8 @@ export const conferenceReducer = (state = initialState, action) => {
                 openParticipationForm: false,
                 openCreateForm: false,
                 updatingConference: false,
+                participationFormId: null,
+                updateFormId: null,
                 error: false,
             };
 

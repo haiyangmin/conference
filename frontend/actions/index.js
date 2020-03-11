@@ -83,10 +83,12 @@ export const getAllConference = () => {
     };
 };
 
-export const openParticipationForm = () => {
+export const openParticipationForm = (id) => {
+    console.log(id);
     return {
         type: OPEN_PARTICIPATION_FORM,
         openParticipationForm: true,
+        participationFormId: id,
     }
 };
 
@@ -94,13 +96,15 @@ export const closeParticipationForm = () => {
     return {
         type: CLOSE_PARTICIPATION_FORM,
         openParticipationForm: false,
+        participationFormId: null,
     }
 };
 
-export const openUpdateForm = () => {
+export const openUpdateForm = (id) => {
     return {
         type: OPEN_UPDATE_FORM,
         openUpdateForm: true,
+        updateFormId: id,
     }
 };
 
@@ -108,6 +112,7 @@ export const closeUpdateForm = () => {
     return {
         type: CLOSE_UPDATE_FORM,
         openUpdateForm: false,
+        updateFormId: null,
     }
 };
 
@@ -148,11 +153,12 @@ export const updateConferenceAction = (id,updates) => {
     };
 };
 
-export const deleteConferenceAction = (name,conference) => {
+export const deleteConferenceAction = (id) => {
     return (dispatch, getState) => {
         dispatch({ type: UPDATE_CONFERENCE });
 
-        deleteConference(name,conference).then(
+        console.log(id);
+        deleteConference(id).then(
             data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
             error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
         );

@@ -3,7 +3,7 @@ import Conference from './Conference';
 import ConferenceRoom from './ConferenceRoom';
 import ParticipationForm from './ParticipationForm';
 import UpdateConferenceForm from './UpdateConferenceForm';
-import DeleteButton from './DeleteButton';
+import Button from './Button';
 
 const ConferenceItem = ({ conference,
                             onParticipate,
@@ -13,6 +13,8 @@ const ConferenceItem = ({ conference,
                             openUpdateForm,
                             closeParticipationForm,
                             closeUpdateForm,
+                            participationFormId,
+                            updateFormId,
                             isParticipationFormOpen,
                             isUpdateFormOpen }) => {
 
@@ -36,36 +38,35 @@ const ConferenceItem = ({ conference,
             address={conference.address}
             seatsLeft={conference.roomAvailability - conference.participants.length}
             maxSeats={conference.roomAvailability} />
-        <div style={isParticipationFormOpen ? show : hide}>
+        <div style={(participationFormId === conference._id) ? show : hide}>
              <ParticipationForm
                  seatsLeft={conference.roomAvailability - conference.participants.length}
                  onParticipate={onParticipate}
                  conference={conference}>
             </ParticipationForm>
         </div>
-        <div style={isUpdateFormOpen ? show : hide}>
+        <div style={(updateFormId === conference._id) ? show : hide}>
             <UpdateConferenceForm
                 onUpdate={onUpdate}
                 conference={conference}>
             </UpdateConferenceForm>
         </div>
         <div className="container" style={{ marginTop: 30 }}>
-            <button
-                className="btn btn-secondary"
-                style={{ marginRight: 20 }}
+            <Button
+                conferenceId={conference._id}
+                buttonName={ (isParticipationFormOpen && (participationFormId === conference._id))  ? 'Close Form' : 'Participate'}
                 onClick={isParticipationFormOpen ? closeParticipationForm : openParticipationForm}>
-                {isParticipationFormOpen ? 'Close Form' : 'Participate'}
-            </button>
-            <button
-                className="btn btn-secondary"
-                style={{ marginRight: 20 }}
+            </Button>
+            <Button
+                conferenceId={conference._id}
+                buttonName={(isUpdateFormOpen && (updateFormId === conference._id)) ? 'Close Form' : 'Update Conference'}
                 onClick={isUpdateFormOpen ? closeUpdateForm : openUpdateForm}>
-                {isUpdateFormOpen ? 'Close Form' : 'Update Conference'}
-            </button>
-            <DeleteButton
-                onCancel={onCancel}
-                conference={conference}>
-            </DeleteButton>
+            </Button>
+            <Button
+                onClick={onCancel}
+                buttonName={'Delete Conference'}
+                conferenceId={conference._id}>
+            </Button>
         </div>
         <hr></hr>
     </div>

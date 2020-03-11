@@ -52,10 +52,10 @@ class CreateConferenceForm extends React.Component {
 
     render() {
         return (
-            <form onSubmit={ this.handleSubmit } className="needs-validation" style={ { marginTop: 20 } }>
+            <form onSubmit={ this.handleSubmit } className="needs-validation" style={ { margin: 20 } }>
                 <div className="form-group">
                     <label>
-                        Name:
+                        Conference Name:
                         <input type="text" value={ this.state.name } className="form-control" onChange={ this.handleNameChange }/>
                     </label>
                 </div>
