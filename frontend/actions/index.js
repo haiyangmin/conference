@@ -18,6 +18,8 @@ import {
     CLOSE_PARTICIPATION_FORM,
     OPEN_UPDATE_FORM,
     CLOSE_UPDATE_FORM,
+    OPEN_CREATE_FORM,
+    CLOSE_CREATE_FORM,
 } from '../constants/ActionTypes';
 
 import {
@@ -81,8 +83,7 @@ export const getAllConference = () => {
     };
 };
 
-export const openParticipationForm = (_) => {
-    console.log(_);
+export const openParticipationForm = () => {
     return {
         type: OPEN_PARTICIPATION_FORM,
         openParticipationForm: true,
@@ -107,6 +108,20 @@ export const closeUpdateForm = () => {
     return {
         type: CLOSE_UPDATE_FORM,
         openUpdateForm: false,
+    }
+};
+
+export const openCreateForm = () => {
+    return {
+        type: OPEN_CREATE_FORM,
+        openCreateForm: true,
+    }
+};
+
+export const closeCreateForm = () => {
+    return {
+        type: CLOSE_CREATE_FORM,
+        openCreateForm: false,
     }
 };
 

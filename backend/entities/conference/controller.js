@@ -57,8 +57,19 @@ const createConference = (conference) => {
                 console.log(error);
                 reject(error);
             }
-
             resolve(newConference);
+        });
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            Conference
+                .find({})
+                .exec((error, results) => {
+                    if (error) {
+                        console.log(error);
+                        reject(error);
+                    } else if (!results) reject(null);
+                    else resolve(results);
+                });
         });
     });
 };
@@ -84,18 +95,45 @@ const updateConference = (id,updates) => {
                     });
                 }
             });
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            Conference
+                .find({})
+                .exec((error, results) => {
+                    if (error) {
+                        console.log(error);
+                        reject(error);
+                    } else if (!results) reject(null);
+                    else resolve(results);
+                });
+        });
     });
 };
 
 const deleteConference = (id) => {
-    let promise = new Promise((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         Conference.remove({ _id: id })
             .exec((error) => {
-                if (error) { console.log(error); reject({ deleted: false }); }
-                else { resolve({ deleted: true }); }
+                if (error) {
+                    console.log(error);
+                    reject({ deleted: false });
+                } else {
+                    resolve({ deleted: true });
+                }
             });
+    }).then(() => {
+        return new Promise((resolve, reject) => {
+            Conference
+                .find({})
+                .exec((error, results) => {
+                    if (error) {
+                        console.log(error);
+                        reject(error);
+                    } else if (!results) reject(null);
+                    else resolve(results);
+                });
+        });
     });
-    return promise.then(getAllConferences());
 };
 
 module.exports = {

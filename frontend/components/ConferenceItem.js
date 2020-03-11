@@ -65,7 +65,7 @@ const ConferenceItem = ({ conference,
         </div>
         <div>
             <DeleteButton
-                onClick={onCancel}
+                onCancel={onCancel}
                 conference={conference}>
                 Cancel conference
             </DeleteButton>

@@ -9,6 +9,8 @@ import {
     CLOSE_PARTICIPATION_FORM,
     OPEN_UPDATE_FORM,
     CLOSE_UPDATE_FORM,
+    OPEN_CREATE_FORM,
+    CLOSE_CREATE_FORM,
     START_FETCHING_CONFERENCES,
     FETCHING_CONFERENCES_SUCCESS,
     FETCHING_CONFERENCES_FAILURE,
@@ -17,10 +19,12 @@ import {
 const initialState = {
     openParticipationForm: false,
     openUpdateForm: false,
+    openCreateForm: false,
     fetchingConferences: true,
     creatingConference: false,
     updatingConference: false,
     conferences: [],
+    error: null,
 };
 
 export const conferenceReducer = (state = initialState, action) => {
@@ -44,6 +48,16 @@ export const conferenceReducer = (state = initialState, action) => {
         case CLOSE_UPDATE_FORM:
             return {...state,
                 openUpdateForm: action.openUpdateForm,
+            };
+
+        case OPEN_CREATE_FORM:
+            return {...state,
+                openCreateForm: action.openCreateForm,
+            };
+
+        case CLOSE_CREATE_FORM:
+            return {...state,
+                openCreateForm: action.openCreateForm,
             };
 
         case START_FETCHING_CONFERENCES:
