@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 class ParticipationForm extends React.Component {
     constructor(props) {
@@ -12,25 +12,32 @@ class ParticipationForm extends React.Component {
     }
 
     handleChange(event) {
-        this.setState({participants: [event.target.value]});
+        this.setState({ participants: [event.target.value] });
     }
 
     handleSubmit(event) {
         event.preventDefault();
-        this.props.onParticipate(this.props.conference._id,this.state)
+        this.props.onParticipate(this.props.conference._id, this.state);
     }
 
     render() {
         return (
-            <form onSubmit={this.handleSubmit}>
+            <form className="form-inline" style={{ marginTop: 20 }}>
                 <label>
                     Name:
-                    <input type="text" value={this.state.participants} onChange={this.handleChange} />
+                    <input type="text" className="form-control" placeholder="Enter Name"
+                           value={ this.state.participants } onChange={ this.handleChange }/>
                 </label>
-                <input type="submit" value="Submit" disabled={this.props.seatsLeft === 0 ? 'disabled' : ''} />
+                <button
+                    className="btn btn-secondary"
+                    style={{ marginLeft: 20 }}
+                    disabled={ this.props.seatsLeft === 0 ? 'disabled' : '' }
+                    onClick={ this.handleSubmit }>
+                    Submit
+                </button>
             </form>
         );
     }
 }
 
-export default ParticipationForm
+export default ParticipationForm;

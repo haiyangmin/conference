@@ -68,6 +68,7 @@ class ConferencesContainer extends Component {
                     </div>
                     <div style={ { marginBottom: 20 } }>
                         <button
+                            className="btn btn-secondary"
                             onClick={ this.props.app.openCreateForm ? this.props.closeCreateForm : this.props.openCreateForm }>
                             Create New Conference
                         </button>

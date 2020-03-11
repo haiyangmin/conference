@@ -13,8 +13,12 @@ class AppContainer extends Component {
 
     render() {
         return (
-            <div>
+            <div className="container">
                 <Helmet><title>Conferences</title></Helmet>
+                <div className="jumbotron text-center">
+                    <h1>Conferences Management</h1>
+                    <p>You can create, update, delete conferences!</p>
+                </div>
                 <ConferencesContainer/>
             </div>
         );

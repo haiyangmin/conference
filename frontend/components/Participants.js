@@ -1,7 +1,7 @@
 import React from 'react'
 
 function ListItem(props) {
-    return <li>{props.value}</li>;
+    return <li className="list-group-item">{props.value}</li>;
 }
 
 const Participants = (props) => {
@@ -11,9 +11,12 @@ const Participants = (props) => {
                   value={participant} />
     );
     return (
-        <ul>
-            {listItems}
-        </ul>
+        <div>
+            <h3>Participant List</h3>
+            <ul className="list-group">
+                {listItems}
+            </ul>
+        </div>
     );
 };
 

@@ -85,6 +85,9 @@ export const conferenceReducer = (state = initialState, action) => {
             return {...state,
                 conferences: action.payload,
                 creatingConference: false,
+                openUpdateForm: false,
+                openParticipationForm: false,
+                openCreateForm: false,
                 error: false,
             };
 
@@ -102,6 +105,9 @@ export const conferenceReducer = (state = initialState, action) => {
         case UPDATE_CONFERENCE_SUCCESS:
             return {...state,
                 conferences: action.payload,
+                openUpdateForm: false,
+                openParticipationForm: false,
+                openCreateForm: false,
                 updatingConference: false,
                 error: false,
             };

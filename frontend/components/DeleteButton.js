@@ -14,8 +14,10 @@ class DeleteButton extends React.Component {
     render() {
         return (
             <button
+                className="btn btn-secondary"
+                style={{ marginRight: 20 }}
                 onClick={this.handleClick}>
-                Cancel conference
+                Delete Conference
             </button>
         );
     }

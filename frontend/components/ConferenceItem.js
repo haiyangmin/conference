@@ -16,8 +16,6 @@ const ConferenceItem = ({ conference,
                             isParticipationFormOpen,
                             isUpdateFormOpen }) => {
 
-    console.log(conference);
-
     const hide = {
         display: 'none',
     };
@@ -27,7 +25,7 @@ const ConferenceItem = ({ conference,
     };
 
     return (
-    <div style={{ marginBottom: 20 }}>
+    <div style={{ marginBottom: 40 }} className="container jumbotron">
         <Conference
             name={conference.name}
             startTime={conference.startTime}
@@ -51,25 +49,25 @@ const ConferenceItem = ({ conference,
                 conference={conference}>
             </UpdateConferenceForm>
         </div>
-        <div>
+        <div className="container" style={{ marginTop: 30 }}>
             <button
+                className="btn btn-secondary"
+                style={{ marginRight: 20 }}
                 onClick={isParticipationFormOpen ? closeParticipationForm : openParticipationForm}>
-                Participate
+                {isParticipationFormOpen ? 'Close Form' : 'Participate'}
             </button>
-        </div>
-        <div>
             <button
+                className="btn btn-secondary"
+                style={{ marginRight: 20 }}
                 onClick={isUpdateFormOpen ? closeUpdateForm : openUpdateForm}>
-                Update conference
+                {isUpdateFormOpen ? 'Close Form' : 'Update Conference'}
             </button>
-        </div>
-        <div>
             <DeleteButton
                 onCancel={onCancel}
                 conference={conference}>
-                Cancel conference
             </DeleteButton>
         </div>
+        <hr></hr>
     </div>
 )};
 

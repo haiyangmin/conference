@@ -2,10 +2,10 @@ import React from 'react'
 
 const ConferenceRoom = ({ name, address, seatsLeft, maxSeats }) => (
     <div>
-        <h1>Conference Room: {name}</h1>
-        <h2>Location: {address}.</h2>
-        <h2>Seats left: {seatsLeft}.</h2>
-        <h2>Max seats: {maxSeats}.</h2>
+        <h3 style={{ marginBottom: 20}}>Room Name: {name}</h3>
+        <h3 style={{ marginBottom: 20}}>Location: {address}.</h3>
+        <h3 style={{ marginBottom: 20}}>Seats left: {seatsLeft}.</h3>
+        <h3 style={{ marginBottom: 20}}>Max seats: {maxSeats}.</h3>
     </div>
 );
 
