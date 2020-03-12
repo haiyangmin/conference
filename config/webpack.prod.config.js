@@ -2,8 +2,8 @@
  * module dependencies for webpack production configuration
  */
 const path = require('path');
-const webpack = require('webpack');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 // define paths
 const nodeModulesPath = path.resolve(__dirname, '../node_modules');
@@ -16,6 +16,7 @@ const containersPath = path.resolve(__dirname, '../frontend', 'containers');
  * webpack production configuration
  */
 module.exports = {
+    mode: 'production',
     target  : 'web',
 
     entry: [
@@ -28,46 +29,28 @@ module.exports = {
     },
 
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loaders: [ 'babel-loader' ],
+                loaders: [ 'react-hot-loader/webpack','babel-loader' ],
                 exclude: [nodeModulesPath],
             },
             {
-                test: /\.css$/,
-                loader: ExtractTextPlugin.extract(
-                    'style-loader',
-                    'css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]!postcss-loader?sourceMap=inline'
-                ),
+                test: /\.css$/i,
+                use: [MiniCssExtractPlugin.loader, 'css-loader'],
             },
             { test: /\.(png|jpg)$/, loader: 'url-loader?limit=8192' },
             { test: /\.svg$/, loader: 'url-loader?limit=10000&mimetype=image/svg+xml' },
         ],
     },
 
-    postcss: [ require('autoprefixer'), require('postcss-nesting') ],
-
     plugins: [
-        new webpack.optimize.DedupePlugin(),
-        new webpack.optimize.OccurrenceOrderPlugin(),
-        new webpack.optimize.UglifyJsPlugin(),
-        new ExtractTextPlugin('style.css', { allChunks: true }),
+        new MiniCssExtractPlugin(),
+        new CleanWebpackPlugin(),
     ],
-
-    resolve: {
-        extensions: ['', '.js', '.css'],
-        alias: {
-            Components: componentsPath,
-            Containers: containersPath,
-        },
-    },
 
     externals: {
         'react': 'React',
         'react-dom': 'ReactDOM',
-        'redux': 'Redux',
-        'react-router': 'ReactRouter',
-        'moment': 'moment',
     },
 };

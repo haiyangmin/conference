@@ -2,6 +2,7 @@
  * module dependencies for webpack dev configuration
  */
 const path = require('path');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const webpack = require('webpack');
 
 // define paths
@@ -15,6 +16,7 @@ const containersPath = path.resolve(__dirname, '../frontend', 'containers');
  * webpack development configuration
  */
 module.exports = {
+    mode: 'development',
     target  : 'web',
     devtool: 'inline-source-map',
 
@@ -23,17 +25,11 @@ module.exports = {
         mainAppPath,
     ],
 
-    output: {
-        filename: 'bundle.js',
-        path: buildPath,
-        publicPath: '/build/',
-    },
-
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.js$/,
-                loaders: [ 'babel-loader' ],
+                loaders: [ 'react-hot-loader/webpack','babel-loader' ],
                 exclude: [nodeModulesPath],
             },
             {
@@ -49,18 +45,23 @@ module.exports = {
         ],
     },
 
-    postcss: [ require('autoprefixer'), require('postcss-nesting') ],
-
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
-        new webpack.NoErrorsPlugin(),
+        new CleanWebpackPlugin(),
     ],
 
+    output: {
+        filename: 'bundle.js',
+        path: buildPath,
+        publicPath: '/build/',
+    },
+
     resolve : {
-        extensions: ['', '.js', '.css'],
+        extensions: ['.js', '.css'],
         alias: {
             Components: componentsPath,
             Containers: containersPath,
         },
     },
+
 };
