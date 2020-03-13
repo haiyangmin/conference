@@ -58,7 +58,7 @@ Now, if you visit [http://localhost:8080](http://localhost:8080) (if you ran the
 ![home view](./docs/12.png)
 
 ### Calculator View
-![admin view](./docs/11.png)
+![Calculator view](./docs/11.png)
 
 
 ## Conclusion
