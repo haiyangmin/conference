@@ -54,6 +54,11 @@ $ npm run start
 
 Now, if you visit [http://localhost:8080](http://localhost:8080) (if you ran the dev), or the production URL, you will see that the application is up and running.
 
+### Home View
+![home view](./docs/12.png)
+
+### Calculator View
+![admin view](./docs/11.png)
 
 
 ## Conclusion
