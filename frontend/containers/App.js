@@ -18,6 +18,7 @@ class AppContainer extends Component {
                 <div className="jumbotron text-center">
                     <h1>Conferences Management</h1>
                     <p>You can create, update, delete conferences!</p>
+                    <a href="/calculator">Click here to check the Calculator</a>
                 </div>
                 <ConferencesContainer/>
             </div>
