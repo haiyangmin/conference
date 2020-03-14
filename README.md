@@ -12,6 +12,8 @@ application built with the following technologies:
 ### Application Features
 * User can create an conference, or update an existing conference, or add themself to existing conference
 
+### Application Features
+*https://pure-basin-08287.herokuapp.com/
 
 ## Run the app locally
 
