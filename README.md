@@ -13,7 +13,7 @@ application built with the following technologies:
 * User can create an conference, or update an existing conference, or add themself to existing conference
 
 ### Demo
-https://pure-basin-08287.herokuapp.com/
+https://boiling-ridge-27851.herokuapp.com/
 
 ## Run the app locally
 
