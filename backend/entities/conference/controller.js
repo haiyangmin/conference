@@ -1,4 +1,5 @@
 const Conference = require('./model');
+const generateDiscussionSlug = require('../../utilities/tools').generateDiscussionSlug;
 
 const getAllConferences = () => {
     return new Promise((resolve, reject) => {
@@ -13,7 +14,6 @@ const getAllConferences = () => {
 };
 
 const getConferenceById = (id) => {
-    console.log('test');
     return new Promise((resolve, reject) => {
         Conference.findById(id)
             .exec((error, results) => {
@@ -42,13 +42,17 @@ const getLatestgetAllConferences = () => {
 const createConference = (conference) => {
     return new Promise((resolve, reject) => {
         const newConference = new Conference({
-            date: new Date(),
+            date: conference.date,
             name: conference.name,
             startTime: conference.startTime,
             endTime: conference.endTime,
             address: conference.address,
+            city: conference.city,
             roomName: conference.roomName,
             roomAvailability: conference.roomAvailability,
+            keywords: conference.keywords,
+            content: conference.content,
+            conference_slug: generateDiscussionSlug(conference.name),
             participants: conference.participants,
         });
 
@@ -83,15 +87,25 @@ const updateConference = (id,updates) => {
                 else if (conference) {
                     Object.keys(updates).forEach((key) => {
                         if (key === 'participants') {
-                            conference[key].push(updates[key][0])
+                            console.log(typeof updates[key][0]);
+                            conference[key].push(updates[key][0]);
+                            console.log(conference[key]);
                         }
+                        // if (key === 'name') {
+                        //     console.log(conference[key]);
+                        //     conference[key] = updates[key];
+                        //     conference['conference_slug'] = generateDiscussionSlug(updates.name);
+                        // }
                         else {
                             conference[key] = updates[key];
                         }
                     });
+                    console.log(conference['participants'],'test');
                     conference.save((error) => {
                         if (error) { console.log(error); reject(error); }
-                        else { resolve(conference); }
+                        else {
+                            console.log(conference);
+                            resolve(conference); }
                     });
                 }
             });
@@ -104,7 +118,8 @@ const updateConference = (id,updates) => {
                         console.log(error);
                         reject(error);
                     } else if (!results) reject(null);
-                    else resolve(results);
+                    else {
+                        resolve(results);}
                 });
         });
     });

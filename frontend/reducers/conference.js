@@ -14,6 +14,9 @@ import {
     START_FETCHING_CONFERENCES,
     FETCHING_CONFERENCES_SUCCESS,
     FETCHING_CONFERENCES_FAILURE,
+    DELETE_CONFERENCE,
+    DELETE_CONFERENCE_SUCCESS,
+    DELETE_CONFERENCE_FAILURE,
 } from '../constants/ActionTypes';
 
 const initialState = {
@@ -25,6 +28,7 @@ const initialState = {
     fetchingConferences: true,
     creatingConference: false,
     updatingConference: false,
+    deletingConference: '',
     conferences: [],
     error: null,
 };
@@ -123,6 +127,30 @@ export const conferenceReducer = (state = initialState, action) => {
         case UPDATE_CONFERENCE_FAILURE:
             return {...state,
                 updatingConference: false,
+                error: 'Unable to update conference',
+            };
+
+
+        case DELETE_CONFERENCE:
+            return {...state,
+                deletingConference: 'deleteStart',
+            };
+
+        case DELETE_CONFERENCE_SUCCESS:
+            return {...state,
+                conferences: action.payload,
+                openUpdateForm: false,
+                openParticipationForm: false,
+                openCreateForm: false,
+                deletingConference: 'deleteSuccess',
+                participationFormId: null,
+                updateFormId: null,
+                error: false,
+            };
+
+        case DELETE_CONFERENCE_FAILURE:
+            return {...state,
+                deletingConference: 'deleteFailed',
                 error: 'Unable to update conference',
             };
 

@@ -12,7 +12,7 @@ import {
     closeCreateForm,
     getAllConference,
 } from '../actions';
-import ConferenceItem from '../components/ConferenceItem';
+import ConferenceListItem from '../components/ConferenceListItem';
 import ConferencesList from '../components/ConferencesList';
 import CreateConferenceForm from '../components/CreateConferenceForm';
 
@@ -20,10 +20,9 @@ import CreateConferenceForm from '../components/CreateConferenceForm';
 class ConferencesContainer extends Component {
     constructor(props) {
         super(props);
-    }
+    };
 
     render() {
-
         const hide = {
             display: 'none',
         };
@@ -34,36 +33,16 @@ class ConferencesContainer extends Component {
 
 
         if (this.props.app.fetchingConferences) {
-            return <div>Loading, Please wait</div>
+            return <div>Loading, Please wait</div>;
         }
 
         if (this.props.app.creatingConference) {
-            return <div>Creating Conference, Please wait</div>
+            return <div>Creating Conference, Please wait</div>;
         }
 
-        if (this.props.app.updatingConference) {
-            return <div>Updating Conference, Please wait</div>
-        }
-
-        if (this.props.app.conferences.length > 0 && !this.props.app.creatingConference && !this.props.app.updatingConference) {
+        if (this.props.app.conferences.length === 0) {
             return (
-                <ConferencesList>
-                    { this.props.app.conferences.map((conference, index) =>
-                        <ConferenceItem
-                            key={ index.toString() }
-                            conference={ conference }
-                            openParticipationForm={ this.props.openParticipationForm }
-                            openUpdateForm={ this.props.openUpdateForm }
-                            closeParticipationForm={ this.props.closeParticipationForm }
-                            closeUpdateForm={ this.props.closeUpdateForm }
-                            participationFormId={ this.props.app.participationFormId }
-                            updateFormId={ this.props.app.updateFormId }
-                            onParticipate={ this.props.updateConferenceAction }
-                            isParticipationFormOpen={ this.props.app.openParticipationForm }
-                            isUpdateFormOpen={ this.props.app.openUpdateForm }
-                            onCancel={ this.props.deleteConferenceAction }
-                            onUpdate={ this.props.updateConferenceAction }/>,
-                    ) }
+                <div>
                     <div style={ this.props.app.openCreateForm ? show : hide }>
                         <CreateConferenceForm onCreate={ this.props.createConferenceAction }>
                         </CreateConferenceForm>
@@ -72,10 +51,36 @@ class ConferencesContainer extends Component {
                         <button
                             className="btn btn-secondary"
                             onClick={ this.props.app.openCreateForm ? this.props.closeCreateForm : this.props.openCreateForm }>
-                            {this.props.app.openCreateForm ? 'Close Form' : 'Create New Conference'}
+                            { this.props.app.openCreateForm ? 'Close Form' : 'Create New Conference' }
                         </button>
                     </div>
-                </ConferencesList>
+                </div>
+            );
+        }
+
+
+        if (this.props.app.conferences.length > 0 && !this.props.app.creatingConference && !this.props.app.updatingConference) {
+            return (
+                <div>
+                    <ConferencesList>
+                        { this.props.app.conferences.map((conference, index) =>
+                            <ConferenceListItem
+                                key={ index.toString() }
+                                conference={ conference }/>,
+                        ) }
+                        <div style={ this.props.app.openCreateForm ? show : hide }>
+                            <CreateConferenceForm onCreate={ this.props.createConferenceAction }>
+                            </CreateConferenceForm>
+                        </div>
+                        <div style={ { marginBottom: 20 } }>
+                            <button
+                                className="btn btn-secondary"
+                                onClick={ this.props.app.openCreateForm ? this.props.closeCreateForm : this.props.openCreateForm }>
+                                { this.props.app.openCreateForm ? 'Close Form' : 'Create New Conference' }
+                            </button>
+                        </div>
+                    </ConferencesList>
+                </div>
             );
         }
     }

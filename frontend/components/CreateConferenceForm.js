@@ -1,14 +1,18 @@
 import React from 'react';
+import TimePicker from './TimePicker';
 
 class CreateConferenceForm extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             name: '',
-            startTime: '',
-            endTime: '',
+            startTime: '08:00AM',
+            endTime: '06:00PM',
+            date: null,
             address: '',
             roomName: '',
+            city: '',
+            content: null,
             roomAvailability: 0,
         };
 
@@ -17,6 +21,9 @@ class CreateConferenceForm extends React.Component {
         this.handleEndTimeChange = this.handleEndTimeChange.bind(this);
         this.handleRoomNameChange = this.handleRoomNameChange.bind(this);
         this.handleAddressChange = this.handleAddressChange.bind(this);
+        this.handleCityChange = this.handleCityChange.bind(this);
+        this.handleDateChange = this.handleDateChange.bind(this);
+        this.handleContentChange = this.handleContentChange.bind(this);
         this.handleRoomAvailabilityChange = this.handleRoomAvailabilityChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
@@ -41,9 +48,21 @@ class CreateConferenceForm extends React.Component {
         this.setState({ address: event.target.value });
     }
 
+    handleCityChange(event) {
+        this.setState({ city: event.target.value });
+    }
+
     handleRoomAvailabilityChange(event) {
         this.setState({ roomAvailability: event.target.value });
     }
+
+    handleDateChange(event) {
+        this.setState({ date: event.target.value });
+    };
+
+    handleContentChange(event) {
+        this.setState({ content: event.target.value });
+    };
 
     handleSubmit(event) {
         event.preventDefault();
@@ -61,15 +80,22 @@ class CreateConferenceForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>
-                        Start time:
-                        <input type="datetime-local" name="start time" value={ this.state.startTime } className="form-control" onChange={ this.handleStartTimeChange }/>
+                        Date:
+                        <input type="date" name="date" className="form-control"
+                               onChange={ this.handleDateChange }/>
                     </label>
                 </div>
                 <div className="form-group">
-                    <label>
-                        End time:
-                        <input type="datetime-local" name="end time" value={ this.state.endTime } className="form-control" onChange={ this.handleEndTimeChange }/>
-                    </label>
+                    <TimePicker
+                        beginLimit={ this.state.startTime }
+                        onChange={ this.handleStartTimeChange }
+                    />
+                </div>
+                <div className="form-group">
+                    <TimePicker
+                        beginLimit={ this.state.endTime }
+                        onChange={ this.handleEndTimeChange }
+                    />
                 </div>
                 <div className="form-group">
                     <label>
@@ -85,9 +111,19 @@ class CreateConferenceForm extends React.Component {
                 </div>
                 <div className="form-group">
                     <label>
+                        City:
+                        <input type="text" name="city" value={ this.state.city } className="form-control" onChange={ this.handleCityChange }/>
+                    </label>
+                </div>
+                <div className="form-group">
+                    <label>
                         Max seats:
                         <input type="number" name="max seats" value={ this.state.roomAvailability } className="form-control" onChange={ this.handleRoomAvailabilityChange }/>
                     </label>
+                </div>
+                <div className="form-group">
+                    <label>Conference Detail:</label>
+                    <textarea className="form-control" rows="5" id="comment" value={this.state.value} onChange={this.handleContentChange}/>
                 </div>
                 <input type="submit" value="Submit"/>
             </form>

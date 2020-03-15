@@ -26,3 +26,7 @@ export const CREATE_CONFERENCE_FAILURE = 'create_conference_failure';
 export const UPDATE_CONFERENCE = 'update_conference';
 export const UPDATE_CONFERENCE_SUCCESS = 'updating_conference_success';
 export const UPDATE_CONFERENCE_FAILURE = 'updating_conference_failure';
+
+export const DELETE_CONFERENCE = 'delete_conference';
+export const DELETE_CONFERENCE_SUCCESS = 'delete_conference_success';
+export const DELETE_CONFERENCE_FAILURE = 'delete_conference_failure';

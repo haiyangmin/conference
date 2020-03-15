@@ -20,6 +20,9 @@ import {
     CLOSE_UPDATE_FORM,
     OPEN_CREATE_FORM,
     CLOSE_CREATE_FORM,
+    DELETE_CONFERENCE,
+    DELETE_CONFERENCE_SUCCESS,
+    DELETE_CONFERENCE_FAILURE,
 } from '../constants/ActionTypes';
 
 import {
@@ -84,7 +87,6 @@ export const getAllConference = () => {
 };
 
 export const openParticipationForm = (id) => {
-    console.log(id);
     return {
         type: OPEN_PARTICIPATION_FORM,
         openParticipationForm: true,
@@ -155,12 +157,11 @@ export const updateConferenceAction = (id,updates) => {
 
 export const deleteConferenceAction = (id) => {
     return (dispatch, getState) => {
-        dispatch({ type: UPDATE_CONFERENCE });
+        dispatch({ type: DELETE_CONFERENCE });
 
-        console.log(id);
         deleteConference(id).then(
-            data => dispatch({ type: UPDATE_CONFERENCE_SUCCESS, payload: data.data }),
-            error => dispatch({ type: UPDATE_CONFERENCE_FAILURE})
+            data => dispatch({ type: DELETE_CONFERENCE_SUCCESS, payload: data.data }),
+            error => dispatch({ type: DELETE_CONFERENCE_FAILURE})
         );
     };
 };
